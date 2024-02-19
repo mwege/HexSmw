@@ -3,6 +3,10 @@
       {
         "name": "capstone", 
         "features": ["x86", "arm", "arm64"]
+      },
+      {
+        "name": "qtbase", 
+        "features": ["default-features"]
       }
     ]
   }
