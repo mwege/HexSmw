@@ -1,0 +1,21 @@
+name: Build
+
+on: [Push]
+
+jobs: 
+  build:
+    name: build
+    runs-on: [ubuntu-latest]
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - name: VcPkg
+      uses: lukka/run-vcpkg@v11
+    - name: Build
+      run: cmake . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+           cmake --build build --config Debug --target all 
+
+
+
+
