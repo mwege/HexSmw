@@ -1,0 +1,8 @@
+{
+    "dependencies": [
+      {
+        "name": "capstone", 
+        "features": ["x86", "arm", "arm64"]
+      }
+    ]
+  }
