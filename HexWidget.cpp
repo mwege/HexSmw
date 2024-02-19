@@ -43,7 +43,6 @@ QString HexWidget::generateHexLine(int offset) {
     QString hexValueRegion = "";
     QString asciiRegion = "";
 
-    //qDebug() <<  _currentFileContent;
     for (int i = offset; i < offset + 32 && i < _currentFileContent.size(); i++) {
         int b = _currentFileContent[i];
 
