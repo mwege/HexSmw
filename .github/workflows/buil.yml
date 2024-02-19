@@ -16,8 +16,9 @@ jobs:
         setupOnly: true
         vcpkgGitCommitId: 5b1214315250939257ef5d62ecdcbca18cf4fb1c
     - name: Build
-      run: cmake . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
-           cmake --build build --config Debug
+      run: |
+           cmake . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+           cmake --build build --config Debug --target all 
 
 
 
