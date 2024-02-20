@@ -6,6 +6,8 @@ jobs:
   build:
     name: windows
     runs-on: [windows-latest]
+    env:
+      VCPKG_ROOT: ${{ github.workspace }}/vcpkg
     steps:
     - uses: actions/checkout@v3
       with:
@@ -15,7 +17,7 @@ jobs:
     - name: VcPkg
       uses: lukka/run-vcpkg@v11
       with:
-        setupOnly: true
+        vcpkgDirectory: ${{ github.workspace }}/vcpkg
         vcpkgGitCommitId: 5b1214315250939257ef5d62ecdcbca18cf4fb1c
     - name: Build
       run: |
