@@ -6,7 +6,8 @@
       },
       {
         "name": "qtbase", 
-        "features": ["default-features"]
+        "default-features": false,
+        "features": ["gui", "widgets"]
       }
     ]
   }
