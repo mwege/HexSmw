@@ -18,7 +18,7 @@ jobs:
     - name: Install Prerequiements
       run: |
            echo Installing packages...
-           sudo apt-get install -y build-essential autoconf libtool
+           sudo apt-get install -y build-essential autoconf autoconf-archive libtool
     - name: Build
       run: |
            cmake . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
