@@ -1,0 +1,36 @@
+name: Windows
+
+on: [push]
+
+jobs: 
+  build:
+    name: windows
+    runs-on: [windows-latest]
+    env:
+        VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: lukka/get-cmake@latest
+    - uses: ilammy/msvc-dev-cmd@v1
+    - name: VcPkg
+      uses: lukka/run-vcpkg@v11
+      with:
+        setupOnly: true
+        vcpkgGitCommitId: 5b1214315250939257ef5d62ecdcbca18cf4fb1c
+    - name: Build
+      run: |
+           mkdir build && cd build
+           cmake .. -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+           cmake --build . --config Debug --target all 
+    - name: Windows Binary Artifact
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: hexsmw-windows-binary
+        path: /home/runner/work/HexSmw/HexSmw/build/HexSmw.exe
+
+
+
+

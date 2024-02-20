@@ -26,11 +26,11 @@ jobs:
            mkdir build && cd build
            cmake .. -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
            cmake --build . --config Debug --target all 
-    - name: Archive logs
+    - name: Linux Binary Artifact
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: build-logs-qt
+        name: hexsmw-linux-binary
         path: /home/runner/work/HexSmw/HexSmw/build/HexSmw
 
 
