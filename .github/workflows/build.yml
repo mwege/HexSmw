@@ -24,6 +24,7 @@ jobs:
     - name: Build
       run: |
            cmake . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+           mkdir build
            cmake --build build --config Debug --target all 
     - name: Archive logs
       if: always()
