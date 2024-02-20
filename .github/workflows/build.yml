@@ -23,6 +23,12 @@ jobs:
       run: |
            cmake . -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
            cmake --build build --config Debug --target all 
+    - name: Archive logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-logs-icu
+        path: /home/runner/work/HexSmw/HexSmw/vcpkg/buildtrees/icu/*.log
 
 
 
