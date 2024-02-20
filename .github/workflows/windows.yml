@@ -21,9 +21,11 @@ jobs:
         vcpkgGitCommitId: 5b1214315250939257ef5d62ecdcbca18cf4fb1c
     - name: Build
       run: |
-           mkdir build && cd build
-           cmake .. -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+           mkdir build
+           cd build
+           cmake .. -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
            cmake --build . --config Debug --target all 
+      shell: cmd
     - name: Windows Binary Artifact
       if: always()
       uses: actions/upload-artifact@v4
