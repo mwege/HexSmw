@@ -18,6 +18,7 @@ jobs:
     - name: Install Prerequiements
       run: |
            echo Installing packages...
+           sudo apt-get update -y
            sudo apt-get install -y build-essential autoconf autoconf-archive libtool
            sudo apt-get install -y libgl1-mesa-dev libxcb-xinerama0-dev libudev-dev libxkbcommon-dev libwayland-dev libegl1-mesa-dev libgles2-mesa-dev libglu1-mesa-dev
     - name: Build
