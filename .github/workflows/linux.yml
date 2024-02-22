@@ -26,13 +26,41 @@ jobs:
            mkdir build && cd build
            cmake .. -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
            cmake --build . --config Debug --target all 
+           ldd /home/runner/work/HexSmw/HexSmw/build/HexSmw
+           file /home/runner/work/HexSmw/HexSmw/build/HexSmw
+    - name: Build deb file
+      run: |
+           cd /tmp
+           mkdir -p smw/DEBIAN
+           mkdir -p smw/usr/bin
+           echo "Package: hexsmw" > DEBIAN/control
+           echo "Section: base" >> DEBIAN/control
+           echo "Version: 0.0.1" >> DEBIAN/control
+           echo "Priority: optional" >> DEBIAN/control
+           echo "Architecture: amd64" >> DEBIAN/control
+           echo "Depends: libqt6gui6 " >> DEBIAN/control
+           echo "Maintainer: Markus Wegehaupt <>" >> DEBIAN/control
+           echo "Homepage: https://" >> DEBIAN/control
+           echo "Description: HexSmw" >> DEBIAN/control
+           echo " Hex editor" >> DEBIAN/control
+           cp /home/runner/work/HexSmw/HexSmw/build/HexSmw smw/usr/bin
+           dpkg-deb --build smw
     - name: Linux Binary Artifact
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: hexsmw-linux-binary
-        path: /home/runner/work/HexSmw/HexSmw/build/HexSmw
+        path: /tmp/smw.deb
+        #/home/runner/work/HexSmw/HexSmw/build/HexSmw
 
 
 
 
+
+
+
+
+
+
+        
+        
