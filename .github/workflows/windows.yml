@@ -22,6 +22,7 @@ jobs:
     - name: Build
       run: |
            ${{ github.workspace }}/vcpkg/vcpkg update
+           ${{ github.workspace }}/vcpkg/vcpkg install capstone[x86,arm,arm64,evm,m680x,m68k,mips,ppc,sparc,sysz]:x64-windows-static
            mkdir build
            cd build
            cmake .. -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
