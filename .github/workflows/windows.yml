@@ -21,6 +21,7 @@ jobs:
         vcpkgGitCommitId: 5b1214315250939257ef5d62ecdcbca18cf4fb1c
     - name: Build
       run: |
+           ${{ github.workspace }}/vcpkg/vcpkg update
            mkdir build
            cd build
            cmake .. -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
@@ -32,7 +33,3 @@ jobs:
       with:
         name: hexsmw-windows-binary
         path: /home/runner/work/HexSmw/HexSmw/build/HexSmw.exe
-
-
-
-
