@@ -19,8 +19,9 @@ jobs:
       run: |
            echo Installing packages...
            sudo apt-get update -y
-           sudo apt-get install -y build-essential autoconf autoconf-archive libtool
+           sudo apt-get install -y build-essential autoconf autoconf-archive libtool 
            sudo apt-get install -y libgl1-mesa-dev libxcb-xinerama0-dev libudev-dev libxkbcommon-dev libwayland-dev libegl1-mesa-dev libgles2-mesa-dev libglu1-mesa-dev
+           sudo apt-get install -y dh-make debhelper devscripts fakeroot
     - name: Build
       run: |
            mkdir build && cd build
@@ -33,16 +34,16 @@ jobs:
            cd /tmp
            mkdir -p smw/DEBIAN
            mkdir -p smw/usr/bin
-           echo "Package: hexsmw" > DEBIAN/control
-           echo "Section: base" >> DEBIAN/control
-           echo "Version: 0.0.1" >> DEBIAN/control
-           echo "Priority: optional" >> DEBIAN/control
-           echo "Architecture: amd64" >> DEBIAN/control
-           echo "Depends: libqt6gui6 " >> DEBIAN/control
-           echo "Maintainer: Markus Wegehaupt <>" >> DEBIAN/control
-           echo "Homepage: https://" >> DEBIAN/control
-           echo "Description: HexSmw" >> DEBIAN/control
-           echo " Hex editor" >> DEBIAN/control
+           echo "Package: hexsmw" > smw/DEBIAN/control
+           echo "Section: base" >> smw/DEBIAN/control
+           echo "Version: 0.0.1" >> smw/DEBIAN/control
+           echo "Priority: optional" >> smw/DEBIAN/control
+           echo "Architecture: amd64" >> smw/DEBIAN/control
+           echo "Depends: libqt6gui6 " >> smw/DEBIAN/control
+           echo "Maintainer: Markus Wegehaupt <>" >> smw/DEBIAN/control
+           echo "Homepage: https://" >> smw/DEBIAN/control
+           echo "Description: HexSmw" >> smw/DEBIAN/control
+           echo " Hex editor" >> smw/DEBIAN/control
            cp /home/runner/work/HexSmw/HexSmw/build/HexSmw smw/usr/bin
            dpkg-deb --build smw
     - name: Linux Binary Artifact
