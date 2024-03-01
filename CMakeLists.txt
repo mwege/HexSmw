@@ -35,13 +35,3 @@ target_link_libraries(${PROJECT_NAME} PRIVATE capstone::capstone)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
 
-#set_target_properties(${PROJECT_NAME} PROPERTIES
-#    WIN32_EXECUTABLE OFF
-#    MACOSX_BUNDLE ON
-#)
-
-
-
-#set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-#set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-#include(CPack)
