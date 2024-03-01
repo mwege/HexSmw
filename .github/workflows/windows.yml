@@ -14,20 +14,34 @@ jobs:
         submodules: true
     - uses: lukka/get-cmake@latest
     - uses: ilammy/msvc-dev-cmd@v1
-    - name: VcPkg
-      uses: lukka/run-vcpkg@v11
+
+    - name: Cache vcpkg
+      uses: actions/cache@v2
+      id: cache-vcpkg
       with:
-        vcpkgDirectory: ${{ github.workspace }}/vcpkg
-        vcpkgGitCommitId: 5b1214315250939257ef5d62ecdcbca18cf4fb1c
+        path: vcpkg/
+        key: vcpkg-x64-windows
+
+    - name: Install Dependencies
+      if: ${{ !steps.cache-vcpkg.outputs.cache-hit }}
+      shell: pwsh
+      run: |
+        git clone https://github.com/microsoft/vcpkg
+        cd vcpkg
+        .\bootstrap-vcpkg.bat
+        .\vcpkg integrate install
+        .\vcpkg install gtest --triplet x64-windows
+
     - name: Build
+      shell: cmd
       run: |
            ${{ github.workspace }}/vcpkg/vcpkg update
-           ${{ github.workspace }}/vcpkg/vcpkg install capstone[x86,arm,arm64,evm,m680x,m68k,mips,ppc,sparc,sysz]:x64-windows-static
            mkdir build
            cd build
            cmake .. -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
            cmake --build . --config Debug --target all 
-      shell: cmd
+      
+
     - name: Windows Binary Artifact
       if: always()
       uses: actions/upload-artifact@v4
