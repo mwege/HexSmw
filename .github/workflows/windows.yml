@@ -35,7 +35,7 @@ jobs:
     - name: Build
       shell: cmd
       run: |
-           export VCPKG_ROOT=${{ github.workspace }}/vcpkg
+           set VCPKG_ROOT=${{ github.workspace }}/vcpkg
            ${{ github.workspace }}/vcpkg/vcpkg update
            mkdir build
            cd build
