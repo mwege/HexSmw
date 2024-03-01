@@ -30,7 +30,7 @@ jobs:
         cd vcpkg
         .\bootstrap-vcpkg.bat
         .\vcpkg integrate install
-        .\vcpkg install gtest --triplet x64-windows
+        .\vcpkg install --triplet x64-windows
 
     - name: Build
       shell: cmd
