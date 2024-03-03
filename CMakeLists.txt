@@ -12,8 +12,12 @@ qt_add_executable(${PROJECT_NAME}
     src/main.cpp 
     src/MainWindow.cpp 
     src/MainWindow.h 
-    src/Widgets/HexViewWidget.cpp 
-    src/Widgets/HexViewWidget.h
+    src/Widgets/EditorStackWidget.cpp 
+    src/Widgets/EditorStackWidget.h
+    src/Widgets/AsmEditorWidget.cpp
+    src/Widgets/AsmEditorWidget.h
+    src/Widgets/HexEditorWidget.cpp
+    src/Widgets/HexEditorWidget.h
 )
 MESSAGE(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}")
 
