@@ -3,16 +3,19 @@
 
 #include <QWidget>
 #include <QTextEdit>
+#include <QStackedWidget>
 
 #include <memory>
 
 class QFile;
+class HexEditorWidget;
+class AsmEditorWidget;
 
-class HexViewWidget : public QWidget{
+class EditorStackWidget : public QStackedWidget{
 public:
     enum ViewMode { DisplayAsm, DisplayHex};
 
-    explicit HexViewWidget(QWidget* parent);
+    explicit EditorStackWidget(QWidget* parent);
     virtual void setFile(QString pathToFile);
     virtual void setMode(ViewMode mode);
 
@@ -28,18 +31,11 @@ private:
     std::unique_ptr<QFile> _currentFile;
 
 private:
-    QString generateHexLine(int offset);
-
     QPointF lastClick;
     ViewMode mode;
     uint64_t offset;
 
-    void paintHexView(QPaintEvent* ev);
-    void paintAsmView(QPaintEvent* ev);
-
-protected:
-    void paintEvent(QPaintEvent*) override;
-    void mouseReleaseEvent(QMouseEvent *) override;
-
+    HexEditorWidget* _hexEditorWidget;
+    AsmEditorWidget* _asmEditorWidget;
 };
 #endif

@@ -6,9 +6,9 @@
 #include <QKeyEvent>
 #include <QWheelEvent>
 
-#include "HexViewWidget.h"
+#include "EditorStackWidget.h"
 
-MainWindow::MainWindow() : _centralWidget(new HexViewWidget(this)) {
+MainWindow::MainWindow() : _centralWidget(new EditorStackWidget(this)) {
     setCentralWidget(_centralWidget);
 
     createActions();
@@ -54,11 +54,11 @@ void MainWindow::openFile() {
 
 
 void MainWindow::displayAsm(){
-    _centralWidget->setMode(HexViewWidget::ViewMode::DisplayAsm);
+    _centralWidget->setMode(EditorStackWidget::ViewMode::DisplayAsm);
 }
 
 void MainWindow::displayHex(){
-     _centralWidget->setMode(HexViewWidget::ViewMode::DisplayHex);
+     _centralWidget->setMode(EditorStackWidget::ViewMode::DisplayHex);
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)

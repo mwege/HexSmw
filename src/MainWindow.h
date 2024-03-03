@@ -6,7 +6,7 @@
 #include <QMainWindow>
 
 
-class HexViewWidget;
+class EditorStackWidget;
 class MainWindow : public QMainWindow {
     Q_OBJECT
     public:
@@ -15,7 +15,7 @@ class MainWindow : public QMainWindow {
     void createMenus();
 
     private:
-    HexViewWidget* _centralWidget;
+    EditorStackWidget* _centralWidget;
 
     QMenu *fileMenu;
     QMenu *viewMenu;
