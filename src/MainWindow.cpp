@@ -6,7 +6,9 @@
 #include <QKeyEvent>
 #include <QWheelEvent>
 
-MainWindow::MainWindow() : _centralWidget(new HexWidget(this)) {
+#include "HexViewWidget.h"
+
+MainWindow::MainWindow() : _centralWidget(new HexViewWidget(this)) {
     setCentralWidget(_centralWidget);
 
     createActions();
@@ -52,11 +54,11 @@ void MainWindow::openFile() {
 
 
 void MainWindow::displayAsm(){
-    _centralWidget->setMode(HexWidget::ViewMode::DisplayAsm);
+    _centralWidget->setMode(HexViewWidget::ViewMode::DisplayAsm);
 }
 
 void MainWindow::displayHex(){
-     _centralWidget->setMode(HexWidget::ViewMode::DisplayHex);
+     _centralWidget->setMode(HexViewWidget::ViewMode::DisplayHex);
 }
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)

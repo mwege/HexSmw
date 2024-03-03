@@ -1,10 +1,12 @@
 #ifndef _MAINWINDOW_H_
 #define _MAINWINDOW_H_
 
-#include "HexWidget.h"
+
 
 #include <QMainWindow>
 
+
+class HexViewWidget;
 class MainWindow : public QMainWindow {
     Q_OBJECT
     public:
@@ -13,7 +15,7 @@ class MainWindow : public QMainWindow {
     void createMenus();
 
     private:
-    HexWidget* _centralWidget;
+    HexViewWidget* _centralWidget;
 
     QMenu *fileMenu;
     QMenu *viewMenu;

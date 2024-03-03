@@ -1,4 +1,4 @@
-#include "HexWidget.h"
+#include "HexViewWidget.h"
 #include "capstone/capstone.h"
 
 #include <QFile>
@@ -6,7 +6,7 @@
 #include <QMouseEvent>
 #include <QFontDatabase>
 
-HexWidget::HexWidget(QWidget *parent) {
+HexViewWidget::HexViewWidget(QWidget *parent) {
     setFile("/Users/mwege/x.txt");
 
     auto fonts = QFontDatabase();
@@ -16,7 +16,7 @@ HexWidget::HexWidget(QWidget *parent) {
     }
 }
 
-void HexWidget::setFile(QString pathToFile) {
+void HexViewWidget::setFile(QString pathToFile) {
     _currentFile = std::make_unique<QFile>(pathToFile);
     _currentFile->open(QIODeviceBase::ReadOnly);
     _currentFileContent = _currentFile->readAll();
@@ -24,7 +24,7 @@ void HexWidget::setFile(QString pathToFile) {
 
 }
 
-void HexWidget::setMode(ViewMode mode){
+void HexViewWidget::setMode(ViewMode mode){
     switch(mode) {
         case ViewMode::DisplayAsm:
             this->mode = mode;
@@ -39,7 +39,7 @@ void HexWidget::setMode(ViewMode mode){
     update();
 }
 
-QString HexWidget::generateHexLine(int offset) {
+QString HexViewWidget::generateHexLine(int offset) {
     QString hexValueRegion = "";
     QString asciiRegion = "";
 
@@ -57,7 +57,7 @@ QString HexWidget::generateHexLine(int offset) {
 }
 
 
-void HexWidget::paintEvent(QPaintEvent* ev){
+void HexViewWidget::paintEvent(QPaintEvent* ev){
     if (mode == ViewMode::DisplayAsm) {
         paintAsmView(ev);
     } else {
@@ -66,14 +66,12 @@ void HexWidget::paintEvent(QPaintEvent* ev){
 }
 
 
-void HexWidget::paintHexView(QPaintEvent* ev){
+void HexViewWidget::paintHexView(QPaintEvent* ev){
     QPainter painter(this);
 
     painter.setPen(QPen(Qt::black));
     painter.setBrush(QBrush(QGradient(QGradient::AfricanField)));
     
-    painter.drawLine(QLine( 0, 0, 100, 100));
-   // painter.setBackground(QBrush(QGradient(QGradient::AfricanField)));
     int width = size().width() - 3;
     int height = size().height() - 5;
     painter.fillRect(0, 0, width, height, QColor(220,220,220));
@@ -96,7 +94,7 @@ void HexWidget::paintHexView(QPaintEvent* ev){
     qDebug() << "paintEvent" << width << " , " << height;
 }
 
-void HexWidget::paintAsmView(QPaintEvent* ev){
+void HexViewWidget::paintAsmView(QPaintEvent* ev){
     QPainter painter(this);
 
     painter.setPen(QPen(Qt::black));
@@ -148,13 +146,13 @@ void HexWidget::paintAsmView(QPaintEvent* ev){
 }
 
 
-void HexWidget::mouseReleaseEvent(QMouseEvent *ev) {
+void HexViewWidget::mouseReleaseEvent(QMouseEvent *ev) {
     QPointF pos = ev->position();
     lastClick = pos;
     update();
 }
 
-void HexWidget::decreaseOffsetByLine(){
+void HexViewWidget::decreaseOffsetByLine(){
     if ( (static_cast<int64_t>(offset) - 16) > 0) {
         offset -= 16;
     } else {
@@ -164,7 +162,7 @@ void HexWidget::decreaseOffsetByLine(){
     update();
 }
 
-void HexWidget::decreaseOffsetByOne(){
+void HexViewWidget::decreaseOffsetByOne(){
     if (offset > 0) {
         offset--;
     }
@@ -172,13 +170,13 @@ void HexWidget::decreaseOffsetByOne(){
     update();
 }
 
-void HexWidget::increaseOffsetByOne(){
+void HexViewWidget::increaseOffsetByOne(){
     offset++;
     qDebug() << "++" << offset;
     update();
 }
 
-void HexWidget::increaseOffsetByLine(){
+void HexViewWidget::increaseOffsetByLine(){
     offset += 16;
     qDebug() << "+16" << offset;
     update();

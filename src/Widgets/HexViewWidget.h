@@ -8,11 +8,11 @@
 
 class QFile;
 
-class HexWidget : public QWidget{
+class HexViewWidget : public QWidget{
 public:
     enum ViewMode { DisplayAsm, DisplayHex};
 
-    explicit HexWidget(QWidget* parent);
+    explicit HexViewWidget(QWidget* parent);
     virtual void setFile(QString pathToFile);
     virtual void setMode(ViewMode mode);
 
