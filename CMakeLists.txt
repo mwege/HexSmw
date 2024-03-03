@@ -9,7 +9,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 qt_standard_project_setup()
 
 qt_add_executable(${PROJECT_NAME}
-    main.cpp MainWindow.cpp MainWindow.h HexWidget.cpp HexWidget.h
+    src/main.cpp 
+    src/MainWindow.cpp 
+    src/MainWindow.h 
+    src/Widgets/HexWidget.cpp 
+    src/Widgets/HexWidget.h
 )
 MESSAGE(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}")
 
@@ -19,6 +23,8 @@ include_directories(
   ${Qt6Qml_INCLUDE_DIRS}
   ${Qt6Quick_INCLUDE_DIRS}
   ${Qt6QuickControls2_INCLUDE_DIRS}
+  src
+  src/Widgets
 )
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
