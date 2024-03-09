@@ -6,6 +6,14 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 set (CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
+if (LINUX)
+    set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=readability-*,performance-*,modernize-*,misc-*,google-*,cppcore-guidelines-*,bugbrone-*")
+endif()
+
 qt_standard_project_setup()
 
 qt_add_executable(${PROJECT_NAME}
