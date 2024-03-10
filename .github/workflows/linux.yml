@@ -24,7 +24,6 @@ jobs:
            sudo apt-get install -y dh-make debhelper devscripts fakeroot
     - name: Build
       run: |
-           $VCPKG_ROOT/vpkg activate clang
            mkdir build && cd build
            cmake .. -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake -DCMAKE_VERBOSE_MAKEFILE=ON
            cmake --build . --config Debug --target all 

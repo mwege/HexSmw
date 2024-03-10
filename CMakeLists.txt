@@ -15,6 +15,7 @@ if (LINUX)
     set(CMAKE_CXX_COMPILER "clang++")
     set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=readability-*,performance-*,modernize-*,misc-*,google-*,cppcore-guidelines-*,bugbrone-*")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++20")
+    set(VCPKG_TARGET_TRIPLET "x64-linux-clang" CACHE STRING "")
   endif()
 
 qt_standard_project_setup()
