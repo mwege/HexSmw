@@ -25,7 +25,7 @@ jobs:
     - name: Build
       run: |
            mkdir build && cd build
-           cmake .. -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+           cmake .. -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake -DCMAKE_VERBOSE_MAKEFILE=ON
            cmake --build . --config Debug --target all 
            ldd /home/runner/work/HexSmw/HexSmw/build/HexSmw
            file /home/runner/work/HexSmw/HexSmw/build/HexSmw
