@@ -11,6 +11,8 @@ if(UNIX AND NOT APPLE)
 endif()
 
 if (LINUX)
+    set(CMAKE_C_COMPILER "clang")
+    set(CMAKE_CXX_COMPILER "clang++")
     set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=readability-*,performance-*,modernize-*,misc-*,google-*,cppcore-guidelines-*,bugbrone-*")
 endif()
 
@@ -45,8 +47,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 find_package(capstone CONFIG REQUIRED)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE capstone::capstone)
-
-
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets)
 
