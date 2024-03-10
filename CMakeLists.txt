@@ -14,7 +14,8 @@ if (LINUX)
     set(CMAKE_C_COMPILER "clang")
     set(CMAKE_CXX_COMPILER "clang++")
     set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=readability-*,performance-*,modernize-*,misc-*,google-*,cppcore-guidelines-*,bugbrone-*")
-endif()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+  endif()
 
 qt_standard_project_setup()
 
