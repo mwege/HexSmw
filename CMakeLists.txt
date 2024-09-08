@@ -30,6 +30,8 @@ qt_add_executable(${PROJECT_NAME}
     src/Widgets/AsmEditorWidget.h
     src/Widgets/HexEditorWidget.cpp
     src/Widgets/HexEditorWidget.h
+    src/Widgets/ToolbarWidget.h
+    src/Widgets/ToolbarWidget.cpp
 )
 MESSAGE(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}")
 
