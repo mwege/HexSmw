@@ -19,6 +19,8 @@ EditorStackWidget::EditorStackWidget(QWidget *parent) {
     
     _asmEditorWidget = new AsmEditorWidget(_currentFileContent);
     _hexEditorWidget = new HexEditorWidget(_currentFileContent);
+
+    connect(this, &EditorStackWidget::architectureChange, _asmEditorWidget, &AsmEditorWidget::onArchitectureChange);
     addWidget(_hexEditorWidget);
     addWidget(_asmEditorWidget);
 }
@@ -86,4 +88,9 @@ void EditorStackWidget::increaseOffsetByLine(){
     _asmEditorWidget->setOffset(offset);
     _hexEditorWidget->setOffset(offset);
     update();
+}
+
+void EditorStackWidget::onArchitectureChange(QString architectureIdentifierString){
+    qDebug() << "EditorStackWidget::onArchitectureChange";
+    emit architectureChange(architectureIdentifierString);
 }

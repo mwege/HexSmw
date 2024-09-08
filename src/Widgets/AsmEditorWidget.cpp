@@ -2,10 +2,10 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-#include "capstone/capstone.h"
 
 AsmEditorWidget::AsmEditorWidget(QByteArray& fileContent)  : _fileContent(fileContent), _offset(0){
-    
+    _capstoneArchType = CS_ARCH_X86;
+    _capstoneArchMode = CS_MODE_16;
 }
 
 void AsmEditorWidget::setOffset(uint64_t offsetValue){
@@ -28,7 +28,7 @@ void AsmEditorWidget::paintEvent(QPaintEvent* ev){
 
     csh handle;
     cs_insn *isn;
-    cs_err err = cs_open(CS_ARCH_X86, CS_MODE_16, &handle);
+    cs_err err = cs_open(_capstoneArchType, _capstoneArchMode, &handle);
     int count = 0;
     int file_size = _fileContent.size();
     int lastBytes = file_size - _offset;
@@ -68,5 +68,24 @@ void AsmEditorWidget::paintEvent(QPaintEvent* ev){
 void AsmEditorWidget::mouseReleaseEvent(QMouseEvent *ev) {
     QPointF pos = ev->position();
     _lastClick = pos;
+    update();
+}
+
+void AsmEditorWidget::onArchitectureChange(QString architectureIdentString){
+
+    qDebug() << "AsmEditorWidget::onArchitectureChange";
+    QMap<QString, QPair<cs_arch, cs_mode> > archMapStringToTypeModeTuple;
+    archMapStringToTypeModeTuple["x86 (16 bit)"] = QPair<cs_arch, cs_mode>(CS_ARCH_X86, CS_MODE_16);
+    archMapStringToTypeModeTuple["x86 (32 bit)"] = QPair<cs_arch, cs_mode>(CS_ARCH_X86, CS_MODE_32);
+    archMapStringToTypeModeTuple["x86 (64 bit)"] = QPair<cs_arch, cs_mode>(CS_ARCH_X86, CS_MODE_64);
+
+    if (archMapStringToTypeModeTuple.contains(architectureIdentString)){
+        QPair<cs_arch, cs_mode> archTuple = archMapStringToTypeModeTuple.value(architectureIdentString);
+        _capstoneArchType = archTuple.first;
+        _capstoneArchMode = archTuple.second;
+        qDebug() << "Set " << architectureIdentString;
+    } else {
+        qDebug() << "invalid arch";
+    }
     update();
 }

@@ -7,12 +7,18 @@
 
 
 class EditorStackWidget;
+class ToolbarWidget;
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
     public:
     MainWindow();
+
+    private:
     void createActions();
     void createMenus();
+    ToolbarWidget* createToolbar();
+
 
     private:
     EditorStackWidget* _centralWidget;

@@ -7,11 +7,13 @@
 
 #include <memory>
 
-class QFile;
+// class QFile;
+#include <QFile>
 class HexEditorWidget;
 class AsmEditorWidget;
 
 class EditorStackWidget : public QStackedWidget{
+    Q_OBJECT
 public:
     enum ViewMode { DisplayAsm, DisplayHex};
 
@@ -37,5 +39,11 @@ private:
 
     HexEditorWidget* _hexEditorWidget;
     AsmEditorWidget* _asmEditorWidget;
+
+public slots:
+    void onArchitectureChange(QString);
+
+signals:
+    void architectureChange(QString);
 };
 #endif

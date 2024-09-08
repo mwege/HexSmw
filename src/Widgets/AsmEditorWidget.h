@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+#include "capstone/capstone.h"
 
 class AsmEditorWidget : public QWidget{
 public:
@@ -16,9 +17,16 @@ private:
     QByteArray& _fileContent;
     QPointF _lastClick;
 
+    cs_arch _capstoneArchType;
+    cs_mode _capstoneArchMode;
+
+
 protected:
     void paintEvent(QPaintEvent*) override;
     void mouseReleaseEvent(QMouseEvent *) override;
+
+public slots:
+    void onArchitectureChange(QString architectureIdentifierString);
 };
 
 

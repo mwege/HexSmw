@@ -7,15 +7,28 @@
 #include <QWheelEvent>
 
 #include "EditorStackWidget.h"
+#include "ToolbarWidget.h"
 
 MainWindow::MainWindow() : _centralWidget(new EditorStackWidget(this)) {
     setCentralWidget(_centralWidget);
+    ToolbarWidget* toolbarMainWindow = createToolbar();
+
+    connect(toolbarMainWindow, &ToolbarWidget::disassemblerArchitectureChanged, _centralWidget, &EditorStackWidget::onArchitectureChange);
+
+    addToolBar(toolbarMainWindow);
 
     createActions();
     createMenus();
 
     installEventFilter(this);
 
+}
+
+ToolbarWidget* MainWindow::createToolbar() {
+    ToolbarWidget* toolbar = new ToolbarWidget(this);
+    openAct = new QAction(tr("&Open"), toolbar);
+    connect(openAct, &QAction::triggered, this, &MainWindow::openFile);
+    return toolbar;
 }
 
 void MainWindow::createActions() {
